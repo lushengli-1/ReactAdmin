@@ -2,9 +2,12 @@ import React from 'react'
 import {Icon,Button,Input,Form, Result, message} from 'antd'
 import { reqLogin } from '../../api'
 import memoryUtils from '../../utils/memoryUtils'
+import storageUtils from '../../utils/storageUtils'
 
 import './login.less'
 import logo from './images/ht.png'
+import { Redirect } from 'react-router-dom'
+
 
 
 /* 登录的路由组件 */
@@ -18,11 +21,14 @@ const layout = {
       span: 20,
     },
   };
+
+ 
 class Login extends  React.Component {
     formRef = React.createRef();
     checkAuth=async()=>{
           
         if (this.formRef && this.formRef.current){ //很重要，在render后，formRef才实例化
+          console.log('djjfhajkfhajfhjakd',this.formRef,this.formRef.current)
              try {
                  // 使用 validateFields 获取多个字段值,若验证通过，则返回表单值数组
                  const values = await this.formRef.current.validateFields();
@@ -38,6 +44,7 @@ class Login extends  React.Component {
                     //保存user
                     const user = result.data
                     memoryUtils.user = user //保存在内存中
+                    storageUtils.saveUser(user)  //保存到local中
                    //跳转到后台管理界面(不需要再回退回来，所以用replace,否则用push)
                    this.props.history.replace('/')
                }else{
@@ -87,8 +94,11 @@ class Login extends  React.Component {
         
       }
     render(){
-       
-        
+      //如果用户已经登录，自动跳转到管理界面（看内存里有没有user）
+        const user = memoryUtils.user
+        if(user && user._id){
+          return <Redirect to='/'/>
+        }
         return(
             <div className="login">
                 <header className="login-header">

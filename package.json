@@ -54,6 +54,7 @@
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
     "semver": "6.0.0",
+    "store": "^2.0.12",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
     "ts-pnp": "1.1.2",
@@ -148,5 +149,5 @@
   "devDependencies": {
     "less": "^4.1.1"
   },
-  "proxy":"http://localhost:5000"
+  "proxy": "http://localhost:5000"
 }
