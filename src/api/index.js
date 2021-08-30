@@ -27,7 +27,8 @@ json请求的接口请求函数
 export const reqWeather = (adcode) => {
     return new Promise((resolve, reject) => {
      // const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
-     const url =  `https://restapi.amap.com/v3/weather/weatherInfo?key=997d899470e9476816bf7a0066bf09a2&city=${adcode}`
+     // const url = 'https://restapi.amap.com/v3/weather/weatherInfo?key=081dd71112ad124f6476086d1d659951&city='+ adcode
+     const url = `https://restapi.amap.com/v3/weather/weatherInfo?key=081dd71112ad124f6476086d1d659951&city=${adcode}`
       // 发送jsonp请求
       jsonp(url, {}, (err, data) => {
         console.log('jsonp()1111111', err, data)

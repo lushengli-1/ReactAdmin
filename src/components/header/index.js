@@ -104,7 +104,7 @@ getTime = () => {
 
 getWeather = async() => {
     //调用接口请求异步获取数据
-   const {city, province, temperature,weather} =  await reqWeather("110000")
+   const {city, province, temperature,weather} =  await reqWeather("520100")
    // 更新状态
    this.setState({
     city,
@@ -140,14 +140,13 @@ gettitle = () => {
 */
 componentDidMount(){
     //获取当前时间
-    // this.getTime()
+     this.getTime()
     // 获取当前天气显示
     this.getWeather()
 
 }
     render(){
-        console.log('hhhhhhhhh',this.state)
-        const {city,province, temperature,weather } = this.state
+        const {city,province, temperature,weather,currentTime } = this.state
         const username = memoryUtils.user.username
         const title = this.gettitle()
         console.log('gggggggggggg',title)
@@ -160,9 +159,11 @@ componentDidMount(){
                <div className='header-bottom'>
                    <div className='header-bottom-left'>{title}</div>
                    <div className='header-bottom-right'>
-                       <span>{province}</span>
-                       <img src="http://api.map.baidu.com/images/weather/day/qing.png" alt="weather"/>
-                       <span>{weather}</span>
+                       <span>{currentTime}</span>
+                       <span style={{fontSize:'15px',marginRight:'5px'}}>{city}</span>
+                      {/*  <img src="http://api.map.baidu.com/images/weather/day/qing.png" alt="weather"/> */}
+                      <span style={{fontSize:'10px',}}>|</span>
+                       <span style={{fontSize:'15px', marginLeft:'5px'}}>{weather}</span>
                    </div>
                </div>
             </div>
