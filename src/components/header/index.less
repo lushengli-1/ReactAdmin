@@ -1,3 +1,47 @@
 .header{
     height: 80px;
+    background:#fff;
+    .header-top{
+        text-align: right;
+        line-height: 40px;
+        padding-right: 20px;
+        height: 40px;
+        border-bottom: 1px solid #1da57a;
+        span{
+            margin-right: 10px;
+        }
+    }
+    .header-bottom{
+        height: 40px;
+        display: flex;
+        align-items: center; //水平居中
+        .header-bottom-left{
+           width: 25%;
+           text-align: center;
+           position: relative;
+           font-size: 15px;
+           &::after { //尾元素 向下的箭头
+               content: "";
+               position: absolute;
+               right: 50%;
+               top: 100%;
+               transform: translateX(50%) ;
+               border-top: 20px solid #fff;
+               border-right: 20px solid transparent;
+               border-bottom: 20px solid transparent;
+               border-left: 20px solid transparent;
+           }
+        }
+        .header-bottom-right{
+           width: 75%;
+            text-align: right;
+            margin-right: 30px;
+            img{
+                margin: 0 15px;
+                width: 30px;
+                height: 20px;
+            }
+        }
+        
+    }
 }

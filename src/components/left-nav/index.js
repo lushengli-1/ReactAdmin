@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import { Menu, Button } from 'antd';
 import {
     AppstoreOutlined,
@@ -82,10 +82,11 @@ const menuList = [
     }
 ]
 const { SubMenu } = Menu;
-export default class LeftNav extends Component{
+ class LeftNav extends Component{
     //根据menu的数据数组生成对应的标签数组
     //使用map()+递归调用
     getMenuNodes = (menuList) => {
+        const path = this.props.location.pathname
         return menuList.map(item => {
             if(!item.children){
                 return (
@@ -96,6 +97,13 @@ export default class LeftNav extends Component{
                     </Menu.Item>
                 )
             }else{
+
+                const citem = item.children.find(citem => citem.key === path)
+                // 如果存在，说明当前item的子列表需要打开
+                if(citem){
+                    this.openkey = item.key
+                }
+               
                 return(
                     <SubMenu key={item.key} icon={item.icon} title={
                         <span>{item.title}</span>
@@ -107,7 +115,13 @@ export default class LeftNav extends Component{
             
         })
     }
+    componentWillMount(){
+        const menuNodes = this.getMenuNodes(menuList)
+    }
     render(){
+       
+        const path = this.props.location.pathname
+        const openkey = this.openkey
         return(
             <div to='/' className='left-nav'>
                 <Link className='left-nav-header'>
@@ -117,6 +131,8 @@ export default class LeftNav extends Component{
                 <Menu 
                     mode='inline'
                     theme='dark'
+                    selectedKeys={[path]}
+                    defaultOpenKeys={[openkey]}
                 >
                     {this.getMenuNodes(menuList)}
 
@@ -125,3 +141,11 @@ export default class LeftNav extends Component{
         )
     }
 }
+
+export default withRouter(LeftNav)
+
+//withRouter 高阶组件
+/* 
+包装非路由组件，返回一个新的组件
+新的组件向非路由组件传递3个属性：history/location/match
+*/

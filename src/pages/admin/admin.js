@@ -4,6 +4,7 @@ import { Layout } from "antd"
 import memoryUtils from "../../utils/memoryUtils"
 import LeftNav from "../../components/left-nav"
 import Head from "../../components/header"
+// import Login from "../login/login"
 import Home from '../home/home'
 import Gategory from '../gategory/gategory'
 import Product from '../product/product'
@@ -33,8 +34,9 @@ export default class Admin extends Component{
             </Sider>
             <Layout>
                 <Head>Header</Head>
-                <Content style={{backgroundColor:'white'}}>
+                <Content style={{margin:20 , backgroundColor:'white'}}>
                   <Switch>
+                     {/*  <Route path='/login' component={Login}/> */}
                       <Route path='/home' component={Home} />
                       <Route path='/gategory' component={Gategory} />
                       <Route path='/product' component={Product} />
