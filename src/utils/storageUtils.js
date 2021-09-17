@@ -19,7 +19,7 @@ export default {
     },
     //删除user
     removeUser(){
-      //  localStorage.removeItem(USER_KEY)
-      store.remove(USER_KEY)
+      //localStorage.removeItem(USER_KEY)
+     store.remove(USER_KEY)
     }
 }

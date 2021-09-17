@@ -8,11 +8,11 @@ export default class App extends Component{
 render(){
   return (
     <BrowserRouter>
-    <Switch>{/* 只匹配其中一个 */}
+    <Switch> {/*只匹配其中一个*/}
       <Route path='/login' component={Login}></Route>
       <Route path='/' component={Admin}></Route>
     </Switch>
-    </BrowserRouter>
+  </BrowserRouter>
   )
 }
 }
