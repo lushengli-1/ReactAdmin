@@ -14,5 +14,5 @@ const user = storageUtils.getUser()
 memoryUtils.user = user
 
 //将App组件标签渲染到index页面上
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 

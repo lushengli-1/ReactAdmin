@@ -1,16 +1,18 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
-import {Popconfirm,message,Modal } from 'antd'
+import {Modal } from 'antd'
 import {reqWeather} from '../../api/index'
 import {formateDate} from '../../utils/dataUtils'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
+import menuList from '../../config/menuConfig'
+import LinkButton from '../link-button'
 import './index.less'
 
 
 
-class Head extends Component{
-/* state = {
+class Header extends Component{
+state = {
     currentTime:formateDate(Date.now()),
     city:"",
     province:"",
@@ -62,7 +64,7 @@ gettitle = () => {
     })
     return title
 }
-confirm = async(e) => {
+/* confirm = async(e) => {
     console.log('确定',e);
     //删除保存的user数据
     console.log('gggggggggggggg',storageUtils.user)
@@ -82,9 +84,10 @@ cancel = (e) => {
   /*
   退出登陆
    */
-  /* logout = () => {
+  logout = () => {
     // 显示确认框
     Modal.confirm({
+        okText:'确定',
       content: '确定退出吗?',
       onOk: () => {
         console.log('OK', this)
@@ -94,15 +97,18 @@ cancel = (e) => {
 
         // 跳转到login
         this.props.history.replace('/login')
+      },
+      onCancle:()=>{
+       console.log('dd')
       }
     })
-  } */
+  }
 
 /* 
 第一次render之后执行，
 一般在此执行异步操作：发送ajax请求或启动定时器
 */
-/* componentDidMount(){
+componentDidMount(){
     //获取当前时间
      this.getTime()
     // 获取当前天气显示
@@ -114,13 +120,28 @@ componentWillUnmount(){
     console.log('清除定时器')
      // 清除定时器
      clearInterval(this.intervalId)
-} */
+}
     render(){
-      
+        const {currentTime, city, weather } = this.state
+        const {username} = memoryUtils.user
+        const title = this.gettitle()
         return(
-          <div className='header'> header</div>
+          <div className='header'> 
+            <div className='header-top'>
+                <span>欢迎, {username}</span>
+                <LinkButton onClick={this.logout}>退出</LinkButton>
+            </div>
+            <div className='header-bottom'>
+                <div className='header-bottom-left'>{title}</div>
+                <div className='header-bottom-right'>
+                    <span>{currentTime}</span>
+                    <span style={{paddingLeft:'10px',paddingRight:'5px'}}>{city}</span>
+                    <span>{weather}</span>
+                </div>
+            </div>
+          </div>
         )
     }
 }
 
-export default withRouter(Head)
+export default withRouter(Header)

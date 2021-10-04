@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon,Button,Input,Form, Result, message} from 'antd'
+import {Icon,Button,Input,Form,message} from 'antd'
 import { reqLogin } from '../../api'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'

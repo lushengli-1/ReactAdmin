@@ -10,31 +10,43 @@ const Option = Select.Option
 
   
 class AddForm extends Component {
+    componentWillMount(){
+        //將form對象通過setForm（）传递给父组件
+        this.props.setForm(this.props.form)
+    }
     render(){
         const {getFieldDecorator} = this.props.form
+        const {categorys,parentId} = this.props
+        console.log('天天天天天',categorys)
         return(
            <Form
            >
                <Item>
                    {
                        getFieldDecorator('parentId',{
-                           initialValue:'0'
-                       })
-                       (
-                        <Select>
+                           initialValue:parentId,
+                           
+                       })(
+                        <Select
+                            
+                        >
                             <Option value='0'>一级分类</Option>
-                            <Option value='1'>呆脑</Option>
+                            {
+                                categorys.map((items,index) => <Option value={items._id} key={index}>{items.name}</Option>)
+                            }
                         </Select>
                        )
                    }
                </Item>
                <Item>
                    {
-                       getFieldDecorator('parentId',{
-                           initialValue:''
-                       })
-                       (
-                        <Input placeholder=''请输入分类名称 />
+                       getFieldDecorator('categoryName',{
+                           initialValue:'',
+                           rules:[
+                            {required:true, message:'分类名称必须输入'}
+                        ]
+                       })(
+                        <Input placeholder='请输入分类名称' />
                        )
                    }
                </Item>

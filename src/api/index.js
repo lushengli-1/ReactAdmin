@@ -56,3 +56,4 @@ export const reqWeather = (adcode) => {
     })
   }
 
+//解决get请求的跨域问题，浏览器通过script标签去发请求，
