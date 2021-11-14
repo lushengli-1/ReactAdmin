@@ -35,7 +35,7 @@ const { SubMenu } = Menu;
           }else{
             //导航栏被选中 刷新后自动展开
             //查找一个与当前请求路径相匹配的子item
-          const cItem =  item.children.find(cItem => cItem.key === path)
+          const cItem =  item.children.find(cItem => path.indexOf(cItem.key)===0)
             //如果存在，说明当前item的子列表需要打开
            if(cItem){
             this.openkey = item.key
@@ -64,8 +64,11 @@ const { SubMenu } = Menu;
     }
     render(){
         //得到当前请求的路由路径
-        const path = this.props.location.pathname
+        let path = this.props.location.pathname
         console.log("获取路径",path)
+        if(path.indexOf('/product') === 0){ //当前请求的是商品或其子路由界面
+            path = '/product'
+        }
         //得到需要打开菜单项的key
         const openkey = this.openkey
         return(
